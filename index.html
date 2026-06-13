@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Absensi Guru Digital Premium</title>
+    <title>Aplikasi Kehadiran</title>
     
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -89,10 +89,11 @@
             <div class="text-center mb-8">
                 <!-- LOGO DINAMIS DARI PENGATURAN -->
                 <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg overflow-hidden border-4 border-white">
-                    <img id="login-logo-img" src="https://ui-avatars.com/api/?name=MIS&background=0f172a&color=fff" class="w-full h-full object-cover" alt="Logo Lembaga" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=MIS&background=0f172a&color=fff';">
+                    <img id="login-logo-img" src="https://iili.io/CCIGAiB.png" class="w-full h-full object-cover" alt="Logo Lembaga" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=MIS&background=0f172a&color=fff';">
                 </div>
-                <h1 class="text-2xl font-bold text-gray-800">HRIS Premium</h1>
-                <p class="text-gray-500 text-sm mt-1" id="login-nama-lembaga">MIS MIFTAHUSSA'ADAH</p>
+                <h1 class="text-2xl font-bold text-gray-800">APLIKASI KEHADIRAN</h1>
+                <p class="text-gray-500 text-sm mt-1 mb-1" id="login-nama-lembaga">MADRASAH IBTIDAIYAH MIFTAHUSSA'ADAH</p>
+                <p class="text-xs text-slate-400 font-medium hidden" id="login-npsn-nsm">NPSN: 60706641 | NSM: 111232010108</p>
             </div>
             
             <form id="form-login" onsubmit="event.preventDefault(); auth.login();">
@@ -112,7 +113,7 @@
             </form>
             
             <div class="mt-6 text-center text-sm text-gray-500">
-                <p>Preview Mode: admin/admin123 atau guru/guru123</p>
+                <p>@20206 MENUJU MADRASAH DIGITAL</p>
             </div>
         </div>
     </div>
@@ -796,7 +797,7 @@
     const IS_PREVIEW = false; // Ganti ke false saat production
     const GAS_URL = "https://script.google.com/macros/s/AKfycbxHDxRGKRdx2wUQWSxESjonAnMGgCqWN3fZU4kuu_zpL0eZVq-Y8D17vEzV4OYOSP5-/exec"; 
 
-    let APP_SETTINGS = { lat: -6.4958241028783785, lng: 107.11829296164869, radius: 50 };
+    let APP_SETTINGS = { lat: -6.495826101620464, lng: 107.11830503158939, radius: 50 };
     let currentUser = null;
     let currentLocation = null;
     let cameraStream = null;
@@ -832,12 +833,14 @@
                     if(action === 'getPublicSettings') {
                         resolve({success:true, data:{
                             nama_lembaga: "MIS MIFTAHUSSA'ADAH",
+                            npsn: "60706641",
+                            nsm: "111232010108",
                             logo: "https://ui-avatars.com/api/?name=MIS&background=0f172a&color=fff"
                         }});
                     }
                     else if(action === 'login') {
                         if(data.username === 'admin' && data.password === 'admin123') resolve({success:true, data:{id_guru:'ADM-1', nama:'Administrator', role:'ADMIN'}});
-                        else if(data.username === 'guru' && data.password === 'guru123') resolve({success:true, data:{id_guru:'GRU-1', nama:'Budi Santoso, S.Pd', role:'GURU', nip:'19800101', mapel:'Guru Kelas', jabatan:'Wali Kelas', tempat_lahir:'Bogor', tgl_lahir:'1980-01-01', jenis_kelamin:'L', alamat:'Cariu, Bogor', no_hp:'08123456', email:'budi@mis.edu', status_pegawai:'GTY', pendidikan:'S1 PAI', tgl_masuk:'2015-07-01'}});
+                        else if(data.username === 'guru' && data.password === 'guru123') resolve({success:true, data:{id_guru:'GRU-1', nama:'Budi Santoso, S.Pd', role:'GURU', nip:'19800101', mapel:'Guru Kelas', jabatan:'Wali Kelas', tempat_lahir:'Bogor', tgl_lahir:'1980-01-01', jenis_kelamin:'L', alamat:'Cariu, Bogor', no_hp:'08123456', email:'budi@mis.edu', status_pegawai:'GTY', pendidikan:'S1 PAI', tgl_masuk:'2015-07-01', username:'guru', password:'guru123', status_akun:'AKTIF'}});
                         else resolve({success:false, message:'Username/Password salah!'});
                     }
                     else if(action === 'absenMasuk' || action === 'absenPulang') { resolve({success:true, message:'Presensi & Selfie berhasil direkam!'}); }
@@ -861,8 +864,8 @@
                     }
                     else if(action === 'getDataGuru') {
                         resolve({success:true, data:[
-                            {id_guru:'GRU-1', nip:'19800101', nama:'Budi Santoso, S.Pd', mapel:'Guru Kelas', jabatan:'Wali Kelas', no_hp:'0812345678', username:'guru', password:'guru123', status_akun:'AKTIF'},
-                            {id_guru:'GRU-2', nip:'19850202', nama:'Siti Aminah, S.Ag', mapel:'PAI', jabatan:'Guru Bidang', no_hp:'0823456789', username:'siti', password:'siti123', status_akun:'AKTIF'}
+                            {id_guru:'GRU-1', nip:'19800101', nama:'Budi Santoso, S.Pd', mapel:'Guru Kelas', jabatan:'Wali Kelas', tempat_lahir:'Bogor', tgl_lahir:'1980-01-01', jenis_kelamin:'L', alamat:'Cariu', no_hp:'0812345678', email:'budi@mis.edu', pendidikan:'S1 PAI', tgl_masuk:'2015-07-01', status_pegawai:'GTY', username:'guru', password:'guru123', status_akun:'AKTIF'},
+                            {id_guru:'GRU-2', nip:'19850202', nama:'Siti Aminah, S.Ag', mapel:'PAI', jabatan:'Guru Bidang', tempat_lahir:'Jakarta', tgl_lahir:'1985-02-02', jenis_kelamin:'P', alamat:'Jonggol', no_hp:'0823456789', email:'siti@mis.edu', pendidikan:'S1 PAI', tgl_masuk:'2018-07-01', status_pegawai:'GTY', username:'siti', password:'siti123', status_akun:'AKTIF'}
                         ]});
                     }
                     else if(action === 'getIzinPending') {
@@ -927,7 +930,7 @@
 
     const auth = {
         init: () => {
-            // Load Public Settings for Logo and Form Setup
+            // Load Public Settings for Logo, NPSN/NSM and Form Setup
             api.call('getPublicSettings').then(res => {
                 if(res.success) {
                     if(res.data.logo) {
@@ -938,6 +941,15 @@
                         document.getElementById('login-nama-lembaga').innerText = res.data.nama_lembaga;
                         if(document.getElementById('set-nama-lembaga')) document.getElementById('set-nama-lembaga').value = res.data.nama_lembaga;
                     }
+                    if(res.data.npsn || res.data.nsm) {
+                        const npsnNsmEl = document.getElementById('login-npsn-nsm');
+                        if(npsnNsmEl) {
+                            npsnNsmEl.innerText = `NPSN: ${res.data.npsn || '-'} | NSM: ${res.data.nsm || '-'}`;
+                            npsnNsmEl.classList.remove('hidden');
+                        }
+                        if(document.getElementById('set-npsn')) document.getElementById('set-npsn').value = res.data.npsn || '';
+                        if(document.getElementById('set-nsm')) document.getElementById('set-nsm').value = res.data.nsm || '';
+                    }
                 }
             });
 
@@ -946,6 +958,13 @@
                 currentUser = JSON.parse(saved);
                 ui.routeBasedOnRole();
             } else { ui.showView('login'); }
+            
+            // Set date print
+            const d = new Date();
+            const months = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+            if(document.getElementById('print-date')) {
+                document.getElementById('print-date').innerText = `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+            }
         },
         login: async () => {
             const u = document.getElementById('login-username').value;
@@ -1010,6 +1029,7 @@
             const titles = { 'dashboard': 'Dashboard', 'monitoring': 'Monitoring Live', 'rekap': 'Rekap & Ranking', 'analitik': 'Analitik', 'laporan': 'Laporan', 'dataguru': 'Data Guru', 'izin': 'Persetujuan Izin', 'pengaturan': 'Pengaturan' };
             document.getElementById('admin-header-title').innerText = titles[tabName] || tabName;
 
+            // Panggil API saat tab diklik (Lazy Load)
             if(tabName === 'dataguru') admin.loadDataGuru();
             if(tabName === 'izin') admin.loadPersetujuanIzin();
             if(tabName === 'monitoring') admin.loadMonitoringLive();
@@ -1017,6 +1037,7 @@
             if(tabName === 'analitik') admin.loadAnalitik();
             if(tabName === 'laporan') admin.loadLaporan();
 
+            // Scroll ke atas
             document.getElementById('main-scroll-area').scrollTop = 0;
         },
 
@@ -1201,6 +1222,7 @@
             if(res.success) Swal.fire('Berhasil!', res.message, 'success');
             else Swal.fire('Gagal', res.message, 'error');
             
+            // Reload history to update status
             guru.loadRiwayat();
         },
 
@@ -1466,7 +1488,7 @@
 
         printLaporan: () => {
             const namaLembaga = document.getElementById('set-nama-lembaga').value || "MIS MIFTAHUSSA'ADAH";
-            const logoSrc = document.getElementById('login-logo-img').src; // Sudah dinamis mengambil img src terupdate
+            const logoSrc = document.getElementById('login-logo-img').src;
             const kepsek = document.getElementById('set-kepsek-nama').value || "(__________________)";
             const nip = document.getElementById('set-kepsek-nip').value || "";
             const periode = document.getElementById('filter-laporan').value;
@@ -1494,10 +1516,9 @@
             const printHtml = `
                 <div style="position:relative; text-align:center; margin-bottom: 20px; border-bottom: 3px solid black; padding-bottom:15px; padding-top:10px;">
                     <img src="${logoSrc}" style="width:75px; height:75px; object-fit:contain; position:absolute; left:20px; top:10px;" onerror="this.style.display='none'">
-                    <h2 style="font-size: 16px; font-weight: bold; margin: 0; text-transform:uppercase;">YAYASAN PENDIDIKAN ISLAM</h2>
-                    <h1 style="font-size: 24px; font-weight: bold; margin: 4px 0; letter-spacing: 1px;">${namaLembaga}</h1>
-                    <p style="font-size: 12px; margin: 0;">Kp. Tegalracak RT. 018/007, Desa Cariu</p>
-                    <p style="font-size: 12px; margin: 0;">Kecamatan Cariu, Kabupaten Bogor</p>
+                    <h2 style="font-size: 16px; font-weight: bold; margin: 0; text-transform:uppercase;">YAYASAN FAJAR ILLAHI CARIU</h2>
+                    <h1 style="font-size: 18px; font-weight: bold; margin: 4px 0; letter-spacing: 1px;">MADRASAH IBTIDAIYAH MIFTAHUSSAADAH</h1>
+                    <p style="font-size: 12px; margin: 0;">Kp. Tegalracak RT. 018/007 Desa Cariu Kec. Cariu Kab. Bogor Jawa Barat</p>
                 </div>
 
                 <div style="text-align:center; margin-bottom: 20px;">
@@ -1572,6 +1593,8 @@
                 let html = "";
                 res.data.forEach(g => {
                     let stColor = g.status_akun === 'AKTIF' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700';
+                    // Encode JSON string safely for onclick handler
+                    let gStr = encodeURIComponent(JSON.stringify(g));
                     html += `
                         <tr class="hover:bg-slate-50 transition border-b border-slate-50">
                             <td class="p-3"><img src="https://ui-avatars.com/api/?name=${g.nama.charAt(0)}&background=random" class="w-10 h-10 rounded-full"></td>
@@ -1581,7 +1604,7 @@
                             <td class="p-3 text-sm text-slate-600"><i class="fa-solid fa-phone text-xs"></i> ${g.no_hp || '-'}</td>
                             <td class="p-3 text-center"><span class="px-2 py-1 rounded-md text-[10px] font-bold ${stColor}">${g.status_akun}</span></td>
                             <td class="p-3 text-center">
-                                <button class="w-8 h-8 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-500 hover:text-white transition"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="admin.editGuru('${gStr}')" class="w-8 h-8 rounded-full bg-blue-50 text-blue-500 hover:bg-blue-500 hover:text-white transition"><i class="fa-solid fa-pen"></i></button>
                                 <button class="w-8 h-8 rounded-full bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
@@ -1593,6 +1616,35 @@
 
         openModalGuru: () => {
             document.getElementById('form-guru').reset();
+            document.getElementById('form-guru').removeAttribute('data-id'); // Bersihkan mode edit
+            document.getElementById('modal-guru-title').innerText = 'Tambah Data Guru';
+            document.getElementById('modal-guru').classList.remove('hidden');
+        },
+
+        editGuru: (gStr) => {
+            const g = JSON.parse(decodeURIComponent(gStr));
+            document.getElementById('form-guru').reset();
+            
+            // Masukkan data guru ke dalam form
+            document.getElementById('g-nip').value = g.nip || '';
+            document.getElementById('g-nama').value = g.nama || '';
+            document.getElementById('g-jk').value = g.jenis_kelamin || 'L';
+            document.getElementById('g-tempat').value = g.tempat_lahir || '';
+            document.getElementById('g-tgllahir').value = g.tgl_lahir || '';
+            document.getElementById('g-hp').value = g.no_hp || '';
+            document.getElementById('g-email').value = g.email || '';
+            document.getElementById('g-alamat').value = g.alamat || '';
+            document.getElementById('g-jabatan').value = g.jabatan || '';
+            document.getElementById('g-mapel').value = g.mapel || '';
+            document.getElementById('g-statuspeg').value = g.status_pegawai || 'GTY';
+            document.getElementById('g-pend').value = g.pendidikan || '';
+            document.getElementById('g-tglmasuk').value = g.tgl_masuk || '';
+            document.getElementById('g-user').value = g.username || '';
+            document.getElementById('g-pass').value = g.password || '';
+            document.getElementById('g-statusakun').value = g.status_akun || 'AKTIF';
+            
+            document.getElementById('modal-guru-title').innerText = 'Edit Data Guru';
+            document.getElementById('form-guru').setAttribute('data-id', g.id_guru); // Set mode edit
             document.getElementById('modal-guru').classList.remove('hidden');
         },
 
@@ -1602,7 +1654,10 @@
             const pass = document.getElementById('g-pass').value;
             if(!nama || !user || !pass) return Swal.fire('Error', 'Nama Lengkap, Username, dan Password wajib diisi.', 'error');
             
+            const id_guru_edit = document.getElementById('form-guru').getAttribute('data-id'); // Null jika tambah baru
+
             const payload = {
+                id_guru: id_guru_edit, // Dikirim ke backend, jika null artinya tambah baru
                 nip: document.getElementById('g-nip').value, nama: nama,
                 jenis_kelamin: document.getElementById('g-jk').value, tempat_lahir: document.getElementById('g-tempat').value,
                 tgl_lahir: document.getElementById('g-tgllahir').value, no_hp: document.getElementById('g-hp').value,
@@ -1615,11 +1670,13 @@
 
             document.getElementById('modal-guru').classList.add('hidden');
             const res = await api.call('saveGuru', payload);
-            if(res.success) { Swal.fire('Berhasil', 'Data guru disimpan', 'success'); admin.loadDataGuru(); } 
-            else Swal.fire('Gagal', res.message, 'error');
+            if(res.success) { 
+                Swal.fire('Berhasil', 'Data guru disimpan', 'success'); 
+                admin.loadDataGuru(); 
+            } else Swal.fire('Gagal', res.message, 'error');
         },
 
-        // --- IMPORT GURU MASAL ---
+        // --- IMPORT GURU MASAL YANG TELAH DIPERBAIKI ---
         openModalImport: () => {
             document.getElementById('file-import-guru').value = "";
             document.getElementById('modal-import-guru').classList.remove('hidden');
@@ -1650,17 +1707,39 @@
                     
                     if(jsonData.length === 0) return Swal.fire('Error', 'File yang diupload kosong atau format tidak sesuai.', 'error');
                     
+                    // PERBAIKAN: Mapping header Excel berbahasa Indonesia ke key database standar backend
+                    const mappedData = jsonData.map(row => ({
+                        nip: row["NIP"] || "",
+                        nama: row["Nama Lengkap"] || "",
+                        jenis_kelamin: row["Jenis Kelamin (L/P)"] || "L",
+                        tempat_lahir: row["Tempat Lahir"] || "",
+                        tgl_lahir: row["Tanggal Lahir (YYYY-MM-DD)"] || "",
+                        no_hp: row["No HP"] || "",
+                        email: row["Email"] || "",
+                        alamat: row["Alamat"] || "",
+                        jabatan: row["Jabatan"] || "",
+                        mapel: row["Mata Pelajaran"] || "",
+                        status_pegawai: row["Status Kepegawaian"] || "GTY",
+                        pendidikan: row["Pendidikan"] || "",
+                        tgl_masuk: row["Tanggal Masuk (YYYY-MM-DD)"] || "",
+                        username: row["Username"] || "",
+                        password: row["Password"] || "",
+                        status_akun: "AKTIF"
+                    })).filter(g => g.nama !== "" && g.username !== ""); // Filter baris kosong/tidak valid
+                    
+                    if(mappedData.length === 0) return Swal.fire('Error', 'Tidak ada baris data valid. Pastikan kolom "Nama Lengkap" dan "Username" terisi.', 'error');
+
                     document.getElementById('modal-import-guru').classList.add('hidden');
                     
-                    const res = await api.call('importGuruMassal', { gurus: jsonData });
+                    const res = await api.call('importGuruMassal', { gurus: mappedData });
                     if(res.success) {
                         Swal.fire('Berhasil', res.message, 'success');
-                        admin.loadDataGuru(); // Refresh tabel data guru
+                        admin.loadDataGuru(); // Refresh tabel setelah impor berhasil
                     } else {
                         Swal.fire('Gagal Import', res.message, 'error');
                     }
                 } catch(err) {
-                    Swal.fire('Error Membaca File', 'Terjadi kesalahan saat memparsing file Excel. Pastikan file tidak corrupt.', 'error');
+                    Swal.fire('Error Membaca File', 'Terjadi kesalahan saat memproses file Excel. Pastikan file tidak rusak.', 'error');
                 }
             };
             reader.readAsArrayBuffer(file);
@@ -1728,7 +1807,7 @@
 
         saveAllSettings: async () => {
             const payload = {
-                logo: document.getElementById('set-logo').value, // Ditambahkan binding untuk Logo
+                logo: document.getElementById('set-logo').value, 
                 nama_lembaga: document.getElementById('set-nama-lembaga').value,
                 npsn: document.getElementById('set-npsn').value,
                 nsm: document.getElementById('set-nsm').value,
@@ -1754,9 +1833,16 @@
                 APP_SETTINGS.lng = parseFloat(payload.lng);
                 APP_SETTINGS.radius = parseInt(payload.radius);
                 
-                // Live update logo and nama lembaga in UI immediately after save
+                // Pembaruan Live di Login Screen 
                 if(payload.logo) document.getElementById('login-logo-img').src = payload.logo;
                 if(payload.nama_lembaga) document.getElementById('login-nama-lembaga').innerText = payload.nama_lembaga;
+                
+                // Pembaruan NPSN NSM Live
+                const npsnNsmEl = document.getElementById('login-npsn-nsm');
+                if(npsnNsmEl && (payload.npsn || payload.nsm)) {
+                    npsnNsmEl.innerText = `NPSN: ${payload.npsn || '-'} | NSM: ${payload.nsm || '-'}`;
+                    npsnNsmEl.classList.remove('hidden');
+                }
                 
                 Swal.fire('Berhasil', 'Seluruh pengaturan sistem berhasil disimpan.', 'success');
             } else {
